@@ -20,7 +20,7 @@ jobs:
 
       - name: "Restore image cache"
         run: |
-          ./restore.sh
+          bash -x ./restore.sh
 
       - name: "Do things in container"
         run: |
@@ -30,4 +30,4 @@ jobs:
 
       - name: "Cache images"
         run: |
-          ./cache.sh
+          bash -x ./cache.sh
