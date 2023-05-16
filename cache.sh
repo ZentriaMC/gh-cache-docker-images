@@ -10,6 +10,7 @@ dump_image () {
         return 0
     fi
 
+    mkdir -p "${destdir}"
     docker image save "${image}" --output "${destdir}/${hash}.tar"
     echo "${image}" > "${destdir}/${hash}.tar.meta"
 }
