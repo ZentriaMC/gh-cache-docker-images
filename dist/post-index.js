@@ -57338,6 +57338,7 @@ async function postEntrypoint() {
   if (!cacheDir) {
     throw new Error("Cache directory not set via state");
   }
+  let savedCount = 0;
   for await (const { imageId, exitCode } of saveImages(cacheDir, newImageIds)) {
     if (exitCode !== 0) {
       core3.warning(
@@ -57346,6 +57347,12 @@ async function postEntrypoint() {
       continue;
     }
     core3.debug(`saved image "${imageId}"`);
+    savedCount++;
+  }
+  core3.debug(`saved ${savedCount} image(s)`);
+  if (savedCount < 1) {
+    core3.debug(`no additional saved images, nothing to cache`);
+    return;
   }
   const cacheKey = computeCacheKey();
   const cacheId = await cache.saveCache([cacheDir], cacheKey);
