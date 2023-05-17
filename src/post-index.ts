@@ -38,6 +38,7 @@ export async function postEntrypoint() {
     }
 
     // TODO: parallel
+    let savedCount = 0;
     for await (
         const { imageId, exitCode } of saveImages(cacheDir, newImageIds)
     ) {
@@ -49,6 +50,13 @@ export async function postEntrypoint() {
         }
 
         core.debug(`saved image "${imageId}"`);
+        savedCount++;
+    }
+
+    core.debug(`saved ${savedCount} image(s)`);
+    if (savedCount < 1) {
+        core.debug(`no additional saved images, nothing to cache`);
+        return;
     }
 
     const cacheKey = computeCacheKey();
