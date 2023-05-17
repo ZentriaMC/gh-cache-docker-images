@@ -16,7 +16,7 @@ jobs:
         uses: "actions/cache@v3"
         with:
           path: "cache"
-          key: "docker-${{ runner.os }}-${{ runner.arch }}-000"
+          key: "docker-${{ runner.os }}-${{ runner.arch }}-001"
 
       - name: "Store stock images list"
         run: |
@@ -26,11 +26,13 @@ jobs:
         run: |
           bash -x ./restore.sh
 
-      - name: "Do things in container"
+      - name: "Do things in containers"
         run: |
           set -euo pipefail
 
-          docker run --rm -i --name "testing" registry.access.redhat.com/ubi9:9.2 cat /etc/os-release
+          while read -r image; do
+            docker --rm --name "testing" --entrypoint="" "${image}" /bin/sh -c "echo testing"
+          done < ./test_images.txt
 
       - name: "Cache images"
         run: |

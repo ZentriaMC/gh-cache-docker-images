@@ -1,0 +1,15 @@
+public.ecr.aws/supabase/storage-api:v0.37.4
+public.ecr.aws/supabase/postgres:15.1.0.70
+public.ecr.aws/supabase/edge-runtime:v1.2.12
+public.ecr.aws/supabase/logflare:1.0.2
+public.ecr.aws/supabase/studio:20230330-99fed3d
+public.ecr.aws/supabase/realtime:v2.10.1
+public.ecr.aws/supabase/vector:0.28.1-alpine
+public.ecr.aws/supabase/gotrue:v2.51.4
+public.ecr.aws/supabase/postgrest:v10.1.2
+public.ecr.aws/supabase/postgres-meta:v0.60.7
+public.ecr.aws/supabase/kong:2.8.1
+public.ecr.aws/supabase/imgproxy:v3.8.0
+public.ecr.aws/supabase/pgadmin-schema-diff:cli-0.0.5
+public.ecr.aws/supabase/inbucket:3.0.3
+public.ecr.aws/supabase/migra:3.0.1621480950
