@@ -11,12 +11,18 @@ jobs:
         id: "checkout"
         uses: "actions/checkout@v3"
 
+      - name: "Setup Supabase CLI"
+        id: "setup-supabase"
+        uses: "supabase/setup-cli@v1"
+        with:
+          version: "latest"
+
       - name: "Setup image cache"
         id: "cache"
         uses: "actions/cache@v3"
         with:
           path: "cache"
-          key: "docker-${{ runner.os }}-${{ runner.arch }}-001"
+          key: "docker-${{ runner.os }}-${{ runner.arch }}-supabase-${{ steps.setup-supabase.outputs.version }}"
 
       - name: "Store stock images list"
         run: |
@@ -26,13 +32,9 @@ jobs:
         run: |
           bash -x ./restore.sh
 
-      - name: "Do things in containers"
+      - name: "Start Supabase local development setup"
         run: |
-          set -euo pipefail
-
-          while read -r image; do
-            docker run --rm --name "testing" --entrypoint="" "${image}" /bin/sh -c "echo testing" || true
-          done < ./test_images.txt
+         supabase start
 
       - name: "Cache images"
         run: |
