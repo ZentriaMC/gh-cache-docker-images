@@ -16,7 +16,11 @@ jobs:
         uses: "actions/cache@v3"
         with:
           path: "cache"
-          key: "docker-${{ runner.os }}-${{ runner.arch }}"
+          key: "docker-${{ runner.os }}-${{ runner.arch }}-000"
+
+      - name: "Store stock images list"
+        run: |
+          bash -x ./dump_images.sh > ./ignored.txt
 
       - name: "Restore image cache"
         run: |
@@ -30,4 +34,4 @@ jobs:
 
       - name: "Cache images"
         run: |
-          bash -x ./cache.sh
+          bash -x ./cache.sh ./ignored.txt
