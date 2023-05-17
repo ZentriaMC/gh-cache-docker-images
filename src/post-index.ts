@@ -59,6 +59,5 @@ export async function postEntrypoint() {
 }
 
 postEntrypoint().catch((error) => {
-    core.error(error);
-    process.exit(1);
+    core.setFailed(error);
 });

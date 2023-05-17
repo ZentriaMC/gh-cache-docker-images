@@ -31,6 +31,5 @@ export async function entrypoint() {
 }
 
 entrypoint().catch((error) => {
-    core.error(error);
-    process.exit(1);
+    core.setFailed(error);
 });
