@@ -1,0 +1,31 @@
+{
+    "name": "gh-cache-docker-images",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsup",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ZentriaMC/gh-cache-docker-images.git"
+    },
+    "keywords": [
+        "actions",
+        "docker",
+        "cache"
+    ],
+    "author": "Mark Vainomaa <mark@zentria.ee>",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "16",
+        "tsup": "6.7.0"
+    },
+    "dependencies": {
+        "@actions/cache": "3.2.1",
+        "@actions/core": "1.10.0",
+        "@actions/glob": "0.4.0",
+        "typescript": "5.0.4"
+    }
+}
