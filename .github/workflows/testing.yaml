@@ -31,7 +31,7 @@ jobs:
           set -euo pipefail
 
           while read -r image; do
-            docker --rm --name "testing" --entrypoint="" "${image}" /bin/sh -c "echo testing"
+            docker run --rm --name "testing" --entrypoint="" "${image}" /bin/sh -c "echo testing"
           done < ./test_images.txt
 
       - name: "Cache images"
