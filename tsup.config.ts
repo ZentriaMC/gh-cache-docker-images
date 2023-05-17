@@ -10,6 +10,9 @@ export default defineConfig({
     sourcemap: true,
     clean: true,
     minify: false,
+    noExternal: [
+        /@actions\/.*/
+    ],
     treeshake: {
         annotations: true,
         moduleSideEffects: false,
