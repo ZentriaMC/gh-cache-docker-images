@@ -2,6 +2,23 @@ import { awaitExit, execCommand } from "./common";
 import { execPromise } from "./promisified";
 import { open } from "fs/promises";
 
+export async function getDockerImageInfo<T>(
+    imageRef: string,
+): Promise<T> {
+    const { stdout } = await execPromise("docker", [
+        "image",
+        "inspect",
+        "--format={{ json . }}",
+        imageRef,
+    ]);
+    const rawInspect = stdout.trim();
+    if (!rawInspect) {
+        throw new Error(`Failed to inspect image "${imageRef}"`);
+    }
+
+    return JSON.parse(rawInspect) as T;
+}
+
 export async function loadDockerImage(
     path: string,
     signal?: AbortSignal,

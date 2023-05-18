@@ -6,12 +6,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
+    getDockerImageInfo,
     loadDockerImage,
     resolveDockerImageID,
     saveDockerImage,
     tagDockerImage,
 } from "./docker.js";
-import { execPromise } from "./promisified.js";
 
 import type { ImageMetadata } from "./meta.js";
 
@@ -19,21 +19,10 @@ export async function saveDockerImageMetadata(
     imageRef: string,
     path: string,
 ): Promise<void> {
-    const { stdout } = await execPromise("docker", [
-        "image",
-        "inspect",
-        "--format={{ json . }}",
-        imageRef,
-    ]);
-    const rawInspect = stdout.trim();
-    if (!rawInspect) {
-        throw new Error(`Failed to inspect image "${imageRef}"`);
-    }
-
     const inspect: {
         Id: string;
         RepoTags: string[];
-    } = JSON.parse(rawInspect);
+    } = await getDockerImageInfo(imageRef);
 
     const metadata: ImageMetadata = {
         Id: inspect.Id,
