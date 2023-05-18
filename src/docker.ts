@@ -1,6 +1,6 @@
-import { awaitExit, execCommand } from "./common";
-import { execPromise } from "./promisified";
-import { open } from "fs/promises";
+import { awaitExit, execCommand } from "./common.js";
+import { execPromise } from "./promisified.js";
+import { open } from "node:fs/promises";
 
 export async function getDockerImageInfo<T>(
     imageRef: string,

@@ -1,7 +1,6 @@
 import * as core from "@actions/core";
 
 import { ChildProcess, IOType, spawn } from "node:child_process";
-
 import { Stream } from "node:stream";
 
 export function setupUncaughtHook() {
